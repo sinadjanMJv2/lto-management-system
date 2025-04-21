@@ -1,0 +1,146 @@
+ 
+ 
+ 
+  #navbar{
+  position: sticky;
+  top: 0;
+  }
+
+
+  header {
+    background-color: #007BFF;
+    padding: 10px;
+    color: #fff;
+  }
+
+  .container {
+    margin-top: 20px;
+   
+  }
+
+  .schedule {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .schedules{
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    /* width: 18rem; */
+  }
+
+
+  @media (max-width: 576px) {
+    .schedule {
+      padding: 10px;
+    }
+
+    .schedule .row {
+        flex-wrap: wrap;
+    }
+    
+    .schedule .col-sm-3 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    
+      .profile-header-img {
+          margin-top: 10px; /* Adjust margin for smaller screens */
+       
+         
+      }
+
+   
+  
+
+
+
+    .schedules {
+      padding: 10px;
+      /* width: 31rem; */
+    }
+
+    .schedules .row {
+        flex-wrap: wrap;
+    }
+    
+    .schedules .col-sm-3 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    
+
+  
+    
+    .profile-header {
+      text-align: center;
+  }
+
+  .profile-header .profile-header-img,
+  .profile-header-img+.profile-header-info {
+      margin-left: 0;
+      float: none;
+      text-align: center;
+  }
+
+  .profile-header .profile-header-tab {
+      padding: 0;
+  }
+
+  .profile-header .profile-header-tab>li {
+      display: block;
+      width: 100%;
+      margin: 0;
+  }
+
+
+   
+
+
+
+
+    
+}
+
+.names{
+    margin-bottom: 25px;
+    font-family: 'Poppins', sans-serif;
+}
+.address{
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+
+.slider-container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+}
+
+/* Set fixed width and height for the images */
+.slide img {
+  width: 100%;
+  height: 300px;
+  /* Adjust the height as needed */
+  object-fit: cover;
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  /* Maintain aspect ratio and cover the container */
+}
+
+

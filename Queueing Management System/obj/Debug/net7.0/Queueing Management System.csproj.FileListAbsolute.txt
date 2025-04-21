@@ -1,0 +1,31 @@
+D:\CTU PROJECT\Queueing Management System\bin\Debug\net7.0\appsettings.Development.json
+D:\CTU PROJECT\Queueing Management System\bin\Debug\net7.0\appsettings.json
+D:\CTU PROJECT\Queueing Management System\bin\Debug\net7.0\Queueing Management System.staticwebassets.runtime.json
+D:\CTU PROJECT\Queueing Management System\bin\Debug\net7.0\Queueing Management System.exe
+D:\CTU PROJECT\Queueing Management System\bin\Debug\net7.0\Queueing Management System.deps.json
+D:\CTU PROJECT\Queueing Management System\bin\Debug\net7.0\Queueing Management System.runtimeconfig.json
+D:\CTU PROJECT\Queueing Management System\bin\Debug\net7.0\Queueing Management System.dll
+D:\CTU PROJECT\Queueing Management System\bin\Debug\net7.0\Queueing Management System.pdb
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\Queueing Management System.csproj.AssemblyReference.cache
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\Queueing Management System.GeneratedMSBuildEditorConfig.editorconfig
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\Queueing Management System.AssemblyInfoInputs.cache
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\Queueing Management System.AssemblyInfo.cs
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\Queueing Management System.csproj.CoreCompileInputs.cache
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\Queueing Management System.MvcApplicationPartsAssemblyInfo.cache
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\Queueing Management System.RazorAssemblyInfo.cache
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\Queueing Management System.RazorAssemblyInfo.cs
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\staticwebassets\msbuild.Queueing Management System.Microsoft.AspNetCore.StaticWebAssets.props
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\staticwebassets\msbuild.build.Queueing Management System.props
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Queueing Management System.props
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Queueing Management System.props
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\staticwebassets.pack.json
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\staticwebassets.build.json
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\staticwebassets.development.json
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\scopedcss\bundle\Queueing Management System.styles.css
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\scopedcss\projectbundle\Queueing Management System.bundle.scp.css
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\Queueing Management System.dll
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\refint\Queueing Management System.dll
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\Queueing Management System.pdb
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\Queueing Management System.genruntimeconfig.cache
+D:\CTU PROJECT\Queueing Management System\obj\Debug\net7.0\ref\Queueing Management System.dll
