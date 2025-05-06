@@ -1,0 +1,294 @@
+<h1>Staffing Account Index</h1>
+
+<button type="button" class="btn btn-success" style="color: #ffffff; " data-bs-toggle="modal"
+    data-bs-target="#modalAccountCreate">
+    <i class="fa-solid fa-circle-plus" style="color: #ffffff;"></i>
+    Add New Staff
+</button>
+
+ @Html.Partial("AdminStaff/AdminTable")
+@Html.Partial("AdminStaff/AdminCreateStaff")
+@Html.Partial("AdminStaff/AdminUpdateStaff")
+
+
+
+
+
+
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+<script>
+  var selectedStaffAccount;
+  var selectedStaffAccountId;
+  var inputtedStaffAccount;
+  var StaffAccountList = {};
+
+
+
+
+  $(document).ready(function () {
+    getStaffAccount();
+    displayStaffAccountData();
+
+
+
+    function getStaffAccount() {
+      $.ajax("../api/adminapi/getStaff")
+        .done(function (result) {
+          StaffAccountList = result;
+        });
+    }
+
+
+    $("#createStaffAccount").click((e) => {
+
+      var arrData = {};
+      var formelements = $("#createStaffAccountForm .form-group");
+
+      //getting the data from the form
+      var formInputs = $("#createStaffAccountForm").serializeArray();
+      formInputs.forEach(function (item) {
+        arrData[item.name] = item.value;
+      });
+      
+
+      console.log(arrData)
+
+      if (formInputs.length === formelements.length && formInputs[0].value !== '') {
+        //AJAX ADD DEPARTMENT
+        $.ajax
+          ({
+            url: "../api/adminapi/addStaff",
+            type: "POST",
+            data:
+            {
+              addStaff: arrData
+            },
+          })
+          .done(function () {
+
+            $("#createStaffAccountForm")[0].reset();
+            $("#modalAccountCreate").modal("toggle");
+            getStaffAccount();
+            displaySavedProgress();
+            displayStaffAccountData();
+
+          });
+      }
+      else {
+        alertError();
+      }
+    });
+
+
+    function displayStaffAccountData() {
+      $('#AdminAccountData').DataTable().destroy();
+      if (!$.fn.DataTable.isDataTable('#AdminAccountData')) {
+        $('#AdminAccountData').DataTable({
+          ajax: {
+            url: '../api/adminapi/getStaff', // API endpoint to retrieve department
+            dataSrc: ''
+          },
+          columns:
+            [
+              { data: 'staffId' },
+              { data: 'fullname' },
+              { data: 'username' },
+              { data: 'password' },
+              { data: 'status' },
+              {
+                data: 'staffId',
+                render: function (data, type, row) {
+                  return btnStaffAccount(data);
+                }
+              },
+            ]
+        });
+      }
+      getStaffAccount();
+    }
+
+    function btnStaffAccount(staffId) {
+      return "<center><a class='btn btn-success StaffAccountUpdate' data-id=" + staffId + "><i class='fa-solid fa-pen-to-square' style='color : #ffffff;'></i></a> | <a class='btn btn-danger staffAccountDelete' data-id=" + staffId + "><i class='fa-solid fa-trash' style='color : #ffffff;'></i></a></center>"
+    }
+
+
+    $("tbody").delegate(".StaffAccountUpdate", "click", function (e) {
+      console.log("I was clicked");
+      var i = e.target.closest("a").getAttribute("data-id");
+      if (i != null) {
+        $("#createStaffAccountForm")[0].reset();
+        $("#modalStaffAccountUpdate").modal("toggle");
+
+        selectedStaffAccountId = i;
+        selectedStaffAccount = StaffAccountList.find(element => element.staffId == i);
+
+        oFormObject = document.forms["updateStaffAccountForm"];
+        initForm(oFormObject, selectedStaffAccount);
+
+        $("#status").val(selectedStaffAccount.status);
+      }
+    });
+
+
+
+    function initForm(form, data) {
+
+      Object.getOwnPropertyNames(data).forEach(function (item) {
+        var currentElem = form.elements[item.charAt(0).toUpperCase() + item.slice(1)];
+
+        if (currentElem == null) { return; }
+        form.elements[item.charAt(0).toUpperCase() + item.slice(1)].setAttribute("value", data[item]);
+
+      });
+    }
+
+ 
+    $("#updateStaffacc").click(function () {
+      alertSaveChanges();
+    });
+
+    function alertSaveChanges() {
+      Swal.fire({
+        title: 'Do you want to save the changes?',
+        confirmButtonText: 'Save',
+        showCancelButton: true,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          updatestaffaccountHolder();
+        }
+      })
+    }
+
+    function updatestaffaccountHolder() {
+      var arrData = {};
+      var formelements = $("#updateStaffAccountForm .form-group");
+
+      //getting the data from the form
+      var formInputs = $("#updateStaffAccountForm").serializeArray();
+      formInputs.forEach(function (item) {
+        arrData[item.name] = item.value;
+      });
+      arrData.staffId = selectedStaffAccountId;
+   
+   
+      if (formInputs.length === formelements.length && formInputs[0].value !== '') {
+        proceedUpdate(arrData);
+        console.log("gi click lagi ko " + arrData);
+      } else {
+        alertError();
+      }
+    }
+
+    function proceedUpdate(arrData) {
+      //AJAX UPDATE DEPARTMENT
+      $.ajax
+        ({
+          url: "../api/adminapi/updateStaff",
+          type: "POST",
+          data:
+          {
+            upStaff: arrData,
+          },
+        })
+        .done(function () {
+          $("#updateStaffAccountForm")[0].reset();
+          $("#modalStaffAccountUpdate").modal("toggle");
+          displayStaffAccountData();
+          displaySavedProgress();
+        });
+    } 
+
+
+    $("tbody").delegate(".staffAccountDelete", "click", function (e) {
+      var i = e.target.closest("a").getAttribute("data-id");
+      if (i != null) {
+        //Insert code here for the delete
+        selectedStaffAccountId = i;
+        console.log(selectedStaffAccountId + "mao ni siya");
+        alertDeleteConfirmation();
+      }
+    });
+
+    function alertDeleteConfirmation() {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to Delete this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          proceedDelete();
+        }
+      })
+    }
+
+    function proceedDelete() {
+      console.log(selectedStaffAccountId + "proceed");
+      //AJAX DELETE DEPARTMENT
+      $.ajax
+        ({
+          url: "../api/adminapi/deleteStaff",
+          type: "POST",
+          data:
+          {
+            id: selectedStaffAccountId
+          },
+        })
+        .done(function () {
+          displayStaffAccountData();
+          alertDeleteInfo();
+        });
+    }
+
+
+
+
+
+
+
+
+
+    function alertDeleteInfo() {
+      Swal.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
+    }
+
+
+
+    function alertError() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Input the necessary elements!',
+      })
+    }
+
+    function displaySavedProgress() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+    }
+
+
+  }); /// dont touch it
+  
+  </script>
+

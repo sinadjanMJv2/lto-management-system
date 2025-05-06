@@ -1,0 +1,57 @@
+<div class="modal fade" id="modalAccountCreate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-body d-flex justify-content-center">
+          <h5 class="modal-title" id="exampleModalLabel">Create Staff Account</h5>
+        </div>
+        <button type="button" id="modalAccountCreateClose" class="btn-close btn-light" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body AccountCreate d-flex justify-content-center">
+        <div  style="width: 365px;">
+
+          <form id="createStaffAccountForm">
+            <div class="form-group">
+              <label name="" class="control-label">Full Name</label>
+              <input type="text" name="Fullname" id="inputStaffAccountName" placeholder="Enter Staff Full Name"
+                class="form-control" required />
+            </div>
+
+            <div class="form-group">
+              <label name="" class="control-label">Username</label>
+              <input type="text" name="Username" id="inputStaffAccountUsername" placeholder="Enter Staff Username"
+                class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label name="" class="control-label">Password</label>
+              <input type="text" name="Password" id="inputStaffAccountPassword" placeholder="Enter Staff Password"
+                class="form-control" required />
+            </div>
+
+         
+
+            <div class="form-group">
+              <span class="form-label">Status </span>
+              <select name="Status" class="form-select">
+                <option>Active</option>
+                <option>Inactive</option>
+              </select>
+            </div>
+
+
+          </form>
+
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-body d-flex justify-content-center">
+          <button type="button" class="btn btn-primary" id="createStaffAccount">Confirm</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

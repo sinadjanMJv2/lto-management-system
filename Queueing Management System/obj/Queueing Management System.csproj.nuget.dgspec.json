@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CTU PROJECT\\Queueing Management System\\Queueing Management System.csproj": {}
+    "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\Queueing Management System.csproj": {}
   },
   "projects": {
-    "D:\\CTU PROJECT\\Queueing Management System\\Queueing Management System.csproj": {
+    "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\Queueing Management System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CTU PROJECT\\Queueing Management System\\Queueing Management System.csproj",
+        "projectUniqueName": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\Queueing Management System.csproj",
         "projectName": "Queueing Management System",
-        "projectPath": "D:\\CTU PROJECT\\Queueing Management System\\Queueing Management System.csproj",
+        "projectPath": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\Queueing Management System.csproj",
         "packagesPath": "C:\\Users\\Mj\\.nuget\\packages\\",
-        "outputPath": "D:\\CTU PROJECT\\Queueing Management System\\obj\\",
+        "outputPath": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mj\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net6.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -35,16 +35,41 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -56,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
