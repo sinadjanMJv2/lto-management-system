@@ -12,6 +12,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login & Registration Form</title>
   <!---Custom CSS File--->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
   <link rel="stylesheet" href="~/css/calendar.css">
   <link rel="stylesheet"
@@ -20,13 +21,11 @@
 
 </head>
 
-
+ <h1 class="w-40 text-center">Palihog pislita lang ang adlaw og petsa nga ganahan nimo magpa Appoint, Daghang Salamat!</h1>
 
 <div class="calendar_con">
-    @* <div class="bg-image">
-        <figure><img src="../../image/LTO.jpg" alt="company office"></figure>
-    </div> *@
-    
+   
+   
 
   <div class="wrapper-calendar">
     <header>
@@ -55,6 +54,9 @@
 </div>
 
 
+ @Html.Partial("pop-upBooking")
+
+
 </html>
 
 
@@ -70,11 +72,12 @@
 <script>
   var DateList = [];
   var listDate = [];
+  var selectedDate;
 
   $(() => {
 
     margin();
-    @* getDate(); *@
+    getTransaction();
 
     function margin() {
 
@@ -83,28 +86,29 @@
     }
 
     
-    function getDate() {
-      $.ajax("../api/adminapi/getDate")
-        .done(function (result) {
+      function getTransaction() {
+            $.ajax("../api/adminapi/getTransaction")
+                .done(function (result) {
+
+                    document.querySelector("#appSelect").innerHTML = "";
+
+                    var template = document.querySelector("template#TransactionOptionTemplate");
+                    var parent = document.querySelectorAll("#appSelect");
 
 
-          result.forEach(item => {
-            DateList.push(item.avadate);
+                    for (i = 0; i < parent.length; i++) {
+                        result.forEach(function (item) {
+                            var cloned = template.content.cloneNode(true);
+                            cloned.querySelector("option").value = item.transactionId;
+                            cloned.querySelector("option").innerText = item.transactionName;
+   
+                                parent[i].prepend(cloned);
+                        });
+                    }
 
-          });
+                });
 
-          listDate = [... new Set(DateList)];
-
-          console.log("Date: ", listDate)
-
-
-
-
-
-        });
-
-
-    }
+        }
 
 
 const daysTag = $(".days"),
@@ -205,6 +209,80 @@ $(".icons span").click(function () {
 
   renderCalendar();
 });
+
+
+// Delegate click event on active days
+$(document).on("click", ".days li:not(.inactive)", function () {
+  const selectedDay = $(this).clone().children().remove().end().text().trim(); // remove span.custom-text safely
+  const paddedDay = selectedDay.padStart(2, '0');
+  const paddedMonth = (currMonth + 1).toString().padStart(2, '0');
+  selectedDate = `${currYear}-${paddedMonth}-${paddedDay}`;
+
+  
+  const selectedDateObj = new Date(`${selectedDate}T00:00:00`);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = selectedDateObj.toLocaleDateString('en-US', options);
+  
+  $(".chosen-date").text(formattedDate);
+
+  
+  console.log("Selected Date:", selectedDate);
+    console.log("Selected Date:", formattedDate);
+
+  // Optional: You can set the selected date somewhere if needed
+  // $("#inputTransactionDate").val(selectedDate);
+
+  // Show the modal
+  const modal = new bootstrap.Modal(document.getElementById("modalAppointmentCreate"));
+  modal.show();
+
+
+});
+
+ $("#createAppointment").click((e) => {
+  e.preventDefault();
+
+  var arrData = {};
+  var emptyFields = [];
+  var formelements = $("#createAppointmentForm .form-group");
+  var formInputs = $("#createAppointmentForm").serializeArray();
+
+  formInputs.forEach(function (item) {
+    arrData[item.name] = item.value;
+    if (!item.value.trim()) {
+      emptyFields.push(item.name);
+    }
+  });
+
+  arrData.BookingDate = selectedDate;
+  arrData.Status = "Pending";
+  arrData.Prioritynumber = "Pending";
+  arrData.ValidId = "na";
+
+  if (emptyFields.length > 0) {
+    console.warn("Empty fields detected:", emptyFields.join(", "));
+    Swal.fire("Error", "Please fill out all fields.", "warning");
+    return;
+  }
+
+  // Proceed with AJAX only if all fields are filled
+  $.ajax({
+    url: "../api/adminapi/addBooking",
+    type: "POST",
+    data: {
+      addBooking: arrData
+    },
+    success: function () {
+      $("#createAppointmentForm")[0].reset();
+      $("#modalAppointmentCreate").modal("toggle");
+      displaySavedProgress();
+    },
+    error: function () {
+      Swal.fire("Error", "Submission failed.", "error");
+    }
+  });
+});
+
 
 
 

@@ -1,0 +1,108 @@
+<div class="card_con">
+
+<div class="card" style="width: 18rem;">
+  <img src="~/image/pending-text.webp" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Pending Non-Prof License</h5>
+    <p class="card-text"> Total Pending Non-Prof License</p>
+      <figure><img src="./../image/team.png" alt=""> <h1>500</h1></figure>
+
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="~/image/approved.png" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Approved Non-Prof License</h5>
+    <p class="card-text"> Total Approved Non-Prof License</p>
+      <figure><img src="./../image/team.png" alt=""> <h1>500</h1></figure>
+   
+ 
+  </div>
+</div>
+
+</div>
+
+<style>
+    .card_con{display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 30px; flex-direction: row;}
+       
+    .card-img-top{ height:250px;border: 1px solid #e2d8d8;}
+</style>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script src="~/lib/emailjs/dist/email.min.js"></script>
+
+
+
+<script>
+
+
+  $(() => {
+
+    var userType = sessionStorage.getItem('userType');
+
+    if (userType !== null) {
+      else if (userType === "admin") {
+        window.location.href = "/Admin/AdminDashboard";
+      }
+    }
+
+ 
+
+
+    function empty() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Validation Error',
+        text: 'Please fill in all required fields!',
+        confirmButtonText: 'OK'
+
+      });
+    }
+
+
+
+    function error() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Email Account not found',
+        text: 'Email is invalid!',
+        confirmButtonText: 'OK'
+      });
+    }
+
+    function gmailvalidation() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Incorrect Password and Email',
+        text: 'Email and Password is invalid!',
+        confirmButtonText: 'OK'
+      });
+    }
+
+
+    function displaySavedProgress() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Welcome',
+        text: 'Successfully Login',
+        showConfirmButton: false,
+        timer: 3500
+      })
+
+    }
+
+
+
+
+  });//end of docuent ready
+
+</script>
+
+
+

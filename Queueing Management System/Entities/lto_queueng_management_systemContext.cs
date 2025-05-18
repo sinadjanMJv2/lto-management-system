@@ -17,7 +17,10 @@ namespace Queueing_Management_System.Entities
         }
 
         public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<Booking> Bookings { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Staffing> Staffings { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -54,6 +57,89 @@ namespace Queueing_Management_System.Entities
                     .HasColumnName("username");
             });
 
+            modelBuilder.Entity<Booking>(entity =>
+            {
+                entity.ToTable("booking");
+
+                entity.Property(e => e.BookingId)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("bookingId");
+
+                entity.Property(e => e.Age)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("age");
+
+                entity.Property(e => e.BookingDate)
+                    .HasMaxLength(250)
+                    .HasColumnName("bookingDate");
+
+                entity.Property(e => e.Firstname)
+                    .HasMaxLength(250)
+                    .HasColumnName("firstname");
+
+                entity.Property(e => e.Gmail)
+                    .HasMaxLength(250)
+                    .HasColumnName("gmail");
+
+                entity.Property(e => e.Lastname)
+                    .HasMaxLength(250)
+                    .HasColumnName("lastname");
+
+                entity.Property(e => e.Middlename)
+                    .HasMaxLength(250)
+                    .HasColumnName("middlename");
+
+                entity.Property(e => e.Prioritynumber)
+                    .HasMaxLength(250)
+                    .HasColumnName("prioritynumber");
+
+                entity.Property(e => e.Status)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .HasColumnName("status");
+
+                entity.Property(e => e.TransactionId)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("transactionId");
+
+                entity.Property(e => e.ValidId)
+                    .HasMaxLength(250)
+                    .HasColumnName("validID");
+            });
+
+            modelBuilder.Entity<Client>(entity =>
+            {
+                entity.ToTable("client");
+
+                entity.Property(e => e.ClientId)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("clientId");
+
+                entity.Property(e => e.Age)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("age");
+
+                entity.Property(e => e.Firstname)
+                    .HasMaxLength(250)
+                    .HasColumnName("firstname");
+
+                entity.Property(e => e.Gmail)
+                    .HasMaxLength(250)
+                    .HasColumnName("gmail");
+
+                entity.Property(e => e.Lastname)
+                    .HasMaxLength(250)
+                    .HasColumnName("lastname");
+
+                entity.Property(e => e.Middlename)
+                    .HasMaxLength(250)
+                    .HasColumnName("middlename");
+
+                entity.Property(e => e.ValidId)
+                    .HasMaxLength(250)
+                    .HasColumnName("validId");
+            });
+
             modelBuilder.Entity<Staffing>(entity =>
             {
                 entity.HasKey(e => e.StaffId)
@@ -80,6 +166,19 @@ namespace Queueing_Management_System.Entities
                 entity.Property(e => e.Username)
                     .HasMaxLength(250)
                     .HasColumnName("username");
+            });
+
+            modelBuilder.Entity<Transaction>(entity =>
+            {
+                entity.ToTable("transaction");
+
+                entity.Property(e => e.TransactionId)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("transaction_id");
+
+                entity.Property(e => e.TransactionName)
+                    .HasMaxLength(250)
+                    .HasColumnName("transaction_name");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -19,10 +19,26 @@ public class AdminController : Controller
         {
             return View();
         }
+        
+           public IActionResult LoginAdmin()
+        {
+            return View();
+        }
+
+             public IActionResult AdminDashBoard()
+        {
+            return View();
+        }
 
 
-         public IActionResult AdminSide(){
-            return View("AdminStaff/AdminIndex");
+
+         public IActionResult AdminSide()
+    {
+        return View("AdminStaff/AdminIndex");
+    }
+
+        public IActionResult AdminTransaction(){
+            return View("PartialTransaction/AdminTransactionIndex");
         }
 
         

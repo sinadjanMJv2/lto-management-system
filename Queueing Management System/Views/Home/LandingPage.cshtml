@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LTO Queueing Management System</title>
+  <style>
+    /* General Reset */
+   #sidebar{display: none !important;}
+    * {margin: 0;padding: 0;box-sizing: border-box;}
+
+    body {font-family: Arial, sans-serif;line-height: 1.6;color: #333;}
+
+    /* Header Section */
+    .header {background: #212529;color: white;text-align: center;padding: 50px 20px;}
+
+    .header h1 {font-size: 2.5rem;margin-bottom: 10px;}
+
+    .header p {font-size: 1.2rem;}
+
+    .header button {margin-top: 20px;padding: 10px 20px;font-size: 1rem;color: #212529;background: white;border: none;border-radius: 5px;cursor: pointer;transition: background 0.3s ease;}
+
+    .header button:hover {
+      background: #e0e0e0;}
+
+    /* Features Section */
+    .features {display: flex;flex-wrap: wrap;justify-content: center;padding: 40px 20px;background: #f9f9f9;}
+
+    .feature {flex: 1 1 300px;margin: 20px;padding: 20px;background: white;border-radius: 10px;box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);text-align: center;}
+
+    .feature h3 {margin-bottom: 10px;font-size: 1.5rem;color: #212529;}
+
+    .feature p {font-size: 1rem;}
+    .feature a{    background: #007bff;color: #fff;width: max-content;padding: 5px 10px;display: block;border-radius: 5px;text-align: center;margin: 0 auto;}
+ .feature a:hover{    background: #0056b3;}
+
+    /* Footer Section */
+    .footer {text-align: center;padding: 20px;background: #333;color: white; position: fixed; bottom:0;  width:100%;}
+
+    .footer p {font-size: 0.9rem;}
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+
+    
+    <h1>Welcome to Our Website</h1>
+    <p>Discover the best solution for your needs.</p>
+    <button>Please Choose users Below</button>
+  </header>
+  
+  
+  
+  <!-- Features Section -->
+  <section class="features">
+    <div class="feature">
+    <figure><img src="./../image/admin.png" alt=""></figure>
+      <h3>Admin</h3>
+      <p>Login here and management admin side</p>
+      <a href="http://localhost:5096/admin/loginadmin" class="btn-pages">Click Here</a>
+    </div>
+    <div class="feature">
+          <figure><img src="./../image/grouping.png" alt=""></figure>
+      <h3>Office Staff</h3>
+       <p>Login here and management Office staff side</p>
+      <a href="">Click Here</a>
+    </div>
+    <div class="feature">
+          <figure><img src="./../image/team.png" alt=""></figure>
+      <h3>Client Appointment</h3>
+       <p>Login here and Appointment here</p>
+      <a href="http://localhost:5096/Booking/Index">Click Here</a>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <p>&copy; 2025 Your Company. All rights reserved.</p>
+  </footer>
+
+ 
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/emailjs/dist/email.min.js"></script>
+
+
+ <script>
+  $(() => {
+    RemovedSidebar();
+
+
+    function RemovedSidebar() {
+
+      $(".page-content").removeClass();
+      $(".container-fluid").removeClass();
+
+    }
+});
+  </script>

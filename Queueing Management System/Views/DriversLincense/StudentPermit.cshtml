@@ -1,0 +1,194 @@
+<div class="card_con">
+
+<div class="card" style="width: 18rem;">
+  <img src="~/image/pending-text.webp" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Pending Student Permit</h5>
+    <p class="card-text"> Total Pending Student Permit</p>
+      <figure><img src="./../image/team.png" alt=""> <h1 class="pending">500</h1></figure>
+
+  </div>
+</div>
+
+<div class="card" style="width: 18rem;">
+  <img src="~/image/approved.png" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Approved Student Permit</h5>
+    <p class="card-text"> Total Approved Student Permit</p>
+      <figure><img src="./../image/team.png" alt=""> <h1 class="approved">500</h1></figure>
+   
+ 
+  </div>
+</div>
+
+</div>
+
+
+<br>
+<br>
+<br>
+
+
+<table id="BookingData" class="display table table-bordered table-hover" width="100%">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Full Name</th>
+                    <th>Gmail</th>
+                     <th>Age</th>
+                     <th>Booking Date</th>
+                     <th>Priority Number</th>
+                    <th>Status</th>
+                    <th>Action Result</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+</table>
+
+
+<style>
+    .card_con{display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 30px; flex-direction: row;}
+       
+    .card-img-top{ height:250px;border: 1px solid #e2d8d8;}
+  body {background-color: #f2f2f2;margin: 0;padding: 0;display: flex;justify-content: center;align-items: center;height: 100vh;}
+        
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script src="~/lib/emailjs/dist/email.min.js"></script>
+
+
+
+<script>
+var BookingList = {};
+ var studentPermitBookings = {};
+ 
+  $(() => {
+getBooking();
+displaySPData();
+ 
+ function getBooking() {
+            $.ajax("../api/adminapi/getBookings")
+                .done(function (result) {
+                    BookingList = result;
+
+                });
+        }
+
+
+
+ function displaySPData() {
+  $.ajax({
+    url: '../api/adminapi/getBookings',
+    method: 'GET',
+    success: function(result) {
+      // Filter the data where transactionName is "Student Permit"
+     studentPermitBookings = result.filter(item => item.transactionName === "Student Permit");
+
+      var pendingCount = studentPermitBookings.filter(b => b.status === "Pending").length;
+    var approvedCount = studentPermitBookings.filter(b => b.status === "Approved").length;
+
+$('.pending').text(pendingCount);
+$('.approved').text(approvedCount);
+
+      // Destroy existing DataTable instance
+      if ($.fn.DataTable.isDataTable('#BookingData')) {
+        $('#BookingData').DataTable().destroy();
+      }
+
+      // Initialize DataTable with filtered data
+      $('#BookingData').DataTable({
+        data: studentPermitBookings,
+        columns: [
+          { data: 'bookingId' },
+          { 
+            data: null, 
+            render: function(data, type, row) {
+              return `${row.firstname} ${row.middlename} ${row.lastname}`;
+            }
+          },
+          { data: 'gmail' },
+          { data: 'age' },
+          { data: 'bookingDate' },
+          { data: 'prioritynumber' },
+          { data: 'status' },
+          {
+            data: 'bookingId',
+            render: function (data, type, row) {
+              return btnStaffAccount(data);
+            }
+          },
+        ]
+      });
+    }
+  });
+}
+
+
+    function btnStaffAccount(staffId) {
+      return "<center><a class='btn btn-success StaffAccountUpdate' data-id=" + staffId + "><i class='fa-solid fa-pen-to-square' style='color : #ffffff;'></i></a> <br><br>  <a class='btn btn-danger staffAccountDelete' data-id=" + staffId + "><i class='fa-solid fa-trash' style='color : #ffffff;'></i></a></center>"
+    }
+
+
+   
+
+
+
+    function empty() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Validation Error',
+        text: 'Please fill in all required fields!',
+        confirmButtonText: 'OK'
+
+      });
+    }
+
+
+
+
+    function error() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Email Account not found',
+        text: 'Email is invalid!',
+        confirmButtonText: 'OK'
+      });
+    }
+
+    function gmailvalidation() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Incorrect Password and Email',
+        text: 'Email and Password is invalid!',
+        confirmButtonText: 'OK'
+      });
+    }
+
+
+    function displaySavedProgress() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Welcome',
+        text: 'Successfully Login',
+        showConfirmButton: false,
+        timer: 3500
+      })
+
+    }
+
+
+
+
+  });//end of docuent ready
+
+</script>
+
+
+

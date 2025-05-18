@@ -1,0 +1,294 @@
+<h1>Transactions Process Page</h1>
+
+<button type="button" class="btn btn-success" style="color: #ffffff; " data-bs-toggle="modal"
+    data-bs-target="#modalTransactionCreate">
+    <i class="fa-solid fa-circle-plus" style="color: #ffffff;"></i>
+    Add New Transaction
+</button>
+
+@Html.Partial("PartialTransaction/AdminTransactionTable")
+@Html.Partial("PartialTransaction/AdminCreateTransaction")
+@Html.Partial("PartialTransaction/AdminUpdateTransaction")
+
+
+
+
+
+
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+<script>
+  var selectedTransaction;
+  var selectedTransactionId;
+  var inputtedTransaction;
+  var TransactionList = {};
+
+
+
+
+  $(document).ready(function () {
+    getTransaction();
+    displayTransactionData();
+
+
+
+    function getTransaction() {
+      $.ajax("../api/adminapi/getTransaction")
+        .done(function (result) {
+          TransactionList = result;
+        });
+    }
+
+
+    $("#createTransaction").click((e) => {
+
+      var arrData = {};
+      var formelements = $("#createTransactionForm .form-group");
+
+      //getting the data from the form
+      var formInputs = $("#createTransactionForm").serializeArray();
+      formInputs.forEach(function (item) {
+        arrData[item.name] = item.value;
+      });
+      
+
+      //console.log(arrData)
+
+      if (formInputs.length === formelements.length && formInputs[0].value !== '') {
+        //AJAX ADD DEPARTMENT
+        $.ajax
+          ({
+            url: "../api/adminapi/addTransaction",
+            type: "POST",
+            data:
+            {
+              addTransaction: arrData
+            },
+          })
+          .done(function () {
+
+            $("#createTransactionForm")[0].reset();
+            $("#modalTransactionCreate").modal("toggle");
+            getTransaction();
+            displaySavedProgress();
+            displayTransactionData();
+
+          });
+      }
+      else {
+        alertError();
+      }
+    });
+
+
+   function displayTransactionData() {
+      $('#AdminTransactionData').DataTable().destroy();
+      if (!$.fn.DataTable.isDataTable('#AdminTransactionData')) {
+        $('#AdminTransactionData').DataTable({
+          ajax: {
+            url: '../api/adminapi/getTransaction', // API endpoint to retrieve department
+            dataSrc: ''
+          },
+          columns:
+            [
+              { data: 'transactionId' },
+              { data: 'transactionName' },
+      
+              {
+                data: 'transactionId',
+                render: function (data, type, row) {
+                 return btnTransaction(data);
+                }
+              },
+            ]
+        });
+      }
+      getTransaction();
+    }
+
+
+ 
+    function btnTransaction(transactionId) {
+      return "<center><a class='btn btn-success TransactionUpdate' data-id=" + transactionId + "><i class='fa-solid fa-pen-to-square' style='color : #ffffff;'></i></a> | <a class='btn btn-danger TransactionDelete' data-id=" + transactionId + "><i class='fa-solid fa-trash' style='color : #ffffff;'></i></a></center>"
+    }
+
+
+    $("tbody").delegate(".TransactionUpdate", "click", function (e) {
+      console.log("I was clicked");
+      var i = e.target.closest("a").getAttribute("data-id");
+      if (i != null) {
+        $("#createTransactionForm")[0].reset();
+        $("#modalTransactionUpdate").modal("toggle");
+
+        selectedTransactionId = i;
+        selectedTransaction = TransactionList.find(element => element.transactionId == i);
+
+        oFormObject = document.forms["updateTransactionForm"];
+        initForm(oFormObject, selectedTransaction);
+
+        @* $("#status").val(selectedTransaction.status); *@
+      }
+    });
+
+
+    function initForm(form, data) {
+
+      Object.getOwnPropertyNames(data).forEach(function (item) {
+        var currentElem = form.elements[item.charAt(0).toUpperCase() + item.slice(1)];
+
+        if (currentElem == null) { return; }
+        form.elements[item.charAt(0).toUpperCase() + item.slice(1)].setAttribute("value", data[item]);
+
+      });
+    }
+
+ 
+
+    $("#updateTransactionacc").click(function () {
+      alertSaveChanges();
+    });
+
+    function alertSaveChanges() {
+      Swal.fire({
+        title: 'Do you want to save the changes?',
+        confirmButtonText: 'Save',
+        showCancelButton: true,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          updateTransactionHolder();
+        }
+      })
+    }
+
+    function updateTransactionHolder() {
+      var arrData = {};
+      var formelements = $("#updateTransactionForm .form-group");
+
+      //getting the data from the form
+      var formInputs = $("#updateTransactionForm").serializeArray();
+      formInputs.forEach(function (item) {
+        arrData[item.name] = item.value;
+      });
+      arrData.transactionId = selectedTransactionId;
+   
+   
+      if (formInputs.length === formelements.length && formInputs[0].value !== '') {
+        proceedUpdate(arrData);
+        console.log("gi click lagi ko " + arrData);
+      } else {
+        alertError();
+      }
+    }
+
+    function proceedUpdate(arrData) {
+      //AJAX UPDATE DEPARTMENT
+      $.ajax
+        ({
+          url: "../api/adminapi/updateTransaction",
+          type: "POST",
+          data:
+          {
+            upTransac: arrData,
+          },
+        })
+        .done(function () {
+          $("#updateTransactionForm")[0].reset();
+          $("#modalTransactionUpdate").modal("toggle");
+          displayTransactionData();
+          displaySavedProgress();
+        });
+    } 
+
+ 
+    $("tbody").delegate(".TransactionDelete", "click", function (e) {
+      var i = e.target.closest("a").getAttribute("data-id");
+      if (i != null) {
+        //Insert code here for the delete
+        selectedTransactionId = i;
+        console.log(selectedTransactionId + "mao ni siya");
+        alertDeleteConfirmation();
+      }
+    });
+
+    function alertDeleteConfirmation() {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to Delete this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          proceedDelete();
+        }
+      })
+    }
+
+    function proceedDelete() {
+      console.log(selectedTransactionId + "proceed");
+      //AJAX DELETE DEPARTMENT
+      $.ajax
+        ({
+          url: "../api/adminapi/deleteTransaction",
+          type: "POST",
+          data:
+          {
+            id: selectedTransactionId
+          },
+        })
+        .done(function () {
+          displayTransactionData();
+          alertDeleteInfo();
+        });
+    }
+
+
+
+
+
+
+
+
+
+    function alertDeleteInfo() {
+      Swal.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
+    }
+
+
+
+    function alertError() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Input the necessary elements!',
+      })
+    }
+
+    function displaySavedProgress() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+    }
+
+
+  }); /// dont touch it
+  
+  </script>
+

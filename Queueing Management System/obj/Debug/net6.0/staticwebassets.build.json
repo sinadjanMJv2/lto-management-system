@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7wLdykGtbuuXlC1fN8n8GwrPGvwBlR/WkqgS7vasE64=",
+  "Hash": "tCBr1uSNdix4qfhZnEFCqoCYVi4Fw1WtqfI4Yzj682s=",
   "Source": "Queueing Management System",
   "BasePath": "_content/Queueing Management System",
   "Mode": "Default",
@@ -221,6 +221,23 @@
       "OriginalItemSpec": "wwwroot\\css\\calendar.css"
     },
     {
+      "Identity": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\css\\calendar.min.css",
+      "SourceId": "Queueing Management System",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\",
+      "BasePath": "_content/Queueing Management System",
+      "RelativePath": "css/calendar.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\calendar.min.css"
+    },
+    {
       "Identity": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\css\\demo.css",
       "SourceId": "Queueing Management System",
       "SourceType": "Discovered",
@@ -338,6 +355,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\login.css"
+    },
+    {
+      "Identity": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\css\\loginadmin.css",
+      "SourceId": "Queueing Management System",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\",
+      "BasePath": "_content/Queueing Management System",
+      "RelativePath": "css/loginadmin.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\loginadmin.css"
     },
     {
       "Identity": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\css\\media.css",
@@ -2159,6 +2193,40 @@
       "OriginalItemSpec": "wwwroot\\fonts\\poppins\\roboto-condensed-v16-latin-regular.woff2"
     },
     {
+      "Identity": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\image\\admin.png",
+      "SourceId": "Queueing Management System",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\",
+      "BasePath": "_content/Queueing Management System",
+      "RelativePath": "image/admin.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\image\\admin.png"
+    },
+    {
+      "Identity": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\image\\approved.png",
+      "SourceId": "Queueing Management System",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\",
+      "BasePath": "_content/Queueing Management System",
+      "RelativePath": "image/approved.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\image\\approved.png"
+    },
+    {
       "Identity": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\image\\background.jpg",
       "SourceId": "Queueing Management System",
       "SourceType": "Discovered",
@@ -2312,6 +2380,23 @@
       "OriginalItemSpec": "wwwroot\\image\\frvtatak.jpg"
     },
     {
+      "Identity": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\image\\grouping.png",
+      "SourceId": "Queueing Management System",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\",
+      "BasePath": "_content/Queueing Management System",
+      "RelativePath": "image/grouping.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\image\\grouping.png"
+    },
+    {
       "Identity": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\image\\happy.jpg",
       "SourceId": "Queueing Management System",
       "SourceType": "Discovered",
@@ -2448,6 +2533,23 @@
       "OriginalItemSpec": "wwwroot\\image\\mrms.jpg"
     },
     {
+      "Identity": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\image\\pending-text.webp",
+      "SourceId": "Queueing Management System",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\",
+      "BasePath": "_content/Queueing Management System",
+      "RelativePath": "image/pending-text.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\image\\pending-text.webp"
+    },
+    {
       "Identity": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\image\\profile.jpg",
       "SourceId": "Queueing Management System",
       "SourceType": "Discovered",
@@ -2565,6 +2667,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\image\\teach.jpg"
+    },
+    {
+      "Identity": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\image\\team.png",
+      "SourceId": "Queueing Management System",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\",
+      "BasePath": "_content/Queueing Management System",
+      "RelativePath": "image/team.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\image\\team.png"
     },
     {
       "Identity": "D:\\CTU PROJECT\\lto-management-system\\Queueing Management System\\wwwroot\\images\\ajax-loader.gif",

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  <link rel="stylesheet" href="~/css/loginadmin.css">
+   
+</head>
+<body>
+
+    <section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+          class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-md-8  col-lg-6 col-xl-4 offset-xl-1">
+        <form>
+          <h1 class="lead fw-normal mb-0 me-3 fw-bold fs-1 mb-4">Sign in </h1>
+
+          <!-- Email input -->
+          <div data-mdb-input-init class="form-outline mb-4">
+            <input type="email" id="form3Example3" class="form-control form-control-lg username"
+              placeholder="Enter your username" />
+            <label class="form-label" for="form3Example3">Username</label>
+          </div>
+
+
+          <!-- Password input -->
+          <div data-mdb-input-init class="form-outline mb-3">
+            <input type="password" id="form3Example4" class="form-control form-control-lg password"
+              placeholder="Enter password" />
+            <label class="form-label" for="form3Example4">Password</label>
+          </div>
+
+          
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button id="adminLoginbtn" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                 <button   type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;"   onclick="window.location.href='/'">Back</button>
+           
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  @* <div
+    class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+    <!-- Copyright -->
+    <div class="text-white mb-3 mb-md-0">
+      Copyright © 2025. All rights reserved.
+    </div>
+    <!-- Copyright -->
+
+   
+    <!-- Right -->
+  </div> *@
+</section>
+
+
+    
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/emailjs/dist/email.min.js"></script>
+
+ <script>
+  $(() => {
+  let usernameAdd = [];
+  let AdminList = [];
+
+  RemovedSidebar();
+  getAdminAcc();
+
+  function RemovedSidebar() {
+    $(".page-content").removeClass();
+    $(".container-fluid").removeClass();
+  }
+
+  function getAdminAcc() {
+    $.ajax("../api/adminapi/getAdminAccount")
+      .done(function (result) {
+        AdminList = result;
+
+        const usernames = result.map(item => item.username);
+        usernameAdd = [...new Set(usernames)];
+
+        console.log("username list:", usernameAdd);
+      });
+  }
+
+  $("#adminLoginbtn").click(e => {
+    e.preventDefault();
+    console.log("Login button clicked");
+
+    const username = $(".username").val();
+    const pass = $(".password").val();
+
+    if (username.trim() === "" || pass.trim() === "") {
+      empty();
+    } else if (usernameAdd.includes(username)) {
+      $.ajax({
+        url: "/api/adminapi/userloginAdmin",
+        method: "POST",
+        data: {
+          "username": username,
+          "password": pass
+        },
+        success: res => {
+          sessionStorage.setItem("Logged", true);
+          sessionStorage.setItem("userType", "admin");
+
+          const filteredUserData = AdminList.filter(
+            user => user.username === username && user.password === pass
+          );
+
+          sessionStorage.setItem("adminData", JSON.stringify(filteredUserData));
+
+          displaySavedProgress();
+          location.href = '/Admin/AdminDashboard';
+        },
+        error: err => {
+          gmailvalidation();
+        }
+      });
+    } else {
+      error(); // Username not in allowed list
+    }
+  });
+
+  function empty() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Validation Error',
+      text: 'Please fill in all required fields!',
+      confirmButtonText: 'OK'
+    });
+  }
+
+  function error() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Account Not Found',
+      text: 'Username is invalid!',
+      confirmButtonText: 'OK'
+    });
+  }
+
+  function gmailvalidation() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Incorrect Username or Password',
+      text: 'Username and Password are invalid!',
+      confirmButtonText: 'OK'
+    });
+  }
+
+  function displaySavedProgress() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Welcome',
+      text: 'Successfully Logged In',
+      showConfirmButton: false,
+      timer: 3500
+    });
+  }
+});
+
+  </script>
