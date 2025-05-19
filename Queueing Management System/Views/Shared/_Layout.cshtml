@@ -52,7 +52,7 @@
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
                 <div class="sidebar-brand">
-                    <a asp-area="" asp-controller="Admin" asp-action="AdminSide">LTO MANAGEMENT System</a>
+                    <a asp-area="" asp-controller="Admin" asp-action="AdminDashBoard">LTO MANAGEMENT System</a>
                     <div id="close-sidebar">
                         <i class="fas fa-times"></i>
                     </div>
@@ -139,7 +139,7 @@
                         </li>
                          <li id="trans_laws">
 
-                            <a asp-area="" asp-controller="Admin" asp-action="AdminAvailabilty">
+                            <a asp-area="" asp-controller="DriversLincense" asp-action="LawEnforcementTransactions">
                                 <i class="fas fa-calendar-check"></i>
                                 <span>Law Enforcement <b style="padding-left: 44px; font-weight: 400;">Transactions</b></span>
                             </a>
@@ -160,37 +160,14 @@
                             </a>
                         </li>
 
-                         
-                        <li class="header-menu" id="App">
-                            <span>Appointment</span>
-                        </li>
-                        <li class="sidebar-dropdown" id="Booked">
-                            <a href="#">
-                                <i class="fas fa-book"></i>
-                                <span>Booked</span>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a asp-area="" asp-controller="Booking" asp-action="Index">Booking
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="Home" asp-action="LandingPage">Employee
-                                        </a>
-                                    </li>
-
-
-                                </ul>
-                            </div>
-                        </li>
+                     
 
 
                         <li id="Avail">
 
-                            <a asp-area="" asp-controller="Admin" asp-action="AdminAvailabilty">
+                            <a asp-area="" asp-controller="Home" asp-action="Queue">
                                 <i class="fas fa-calendar-check"></i>
-                                <span>Availability</span>
+                                <span>Queue</span>
                             </a>
                         </li>
 
@@ -250,10 +227,43 @@
 
 <script>
   $(document).ready(function () {
+
+
+
+    let userType = window.sessionStorage.getItem("userType");
+
+   
+    if (userType == null) {
+
+      console.log("login first")
+
+    } else if(userType == "staff"){
+     
+        $(".user-role").html("Office Staff");
+
+        $("#staffing, #trans").css("display", "none");
+        $("#trans ,#staffing").hide();
+
+
+    }  else if(userType == "admin"){
+    
+        $(".user-role").html("Administrator");
+       
+    }
+
+
+
+
+
+
+
     $("#logout").click((e) => {
       e.preventDefault(); // Optional: Prevent default behavior if inside a link
       logoutConfirmation();
     });
+
+
+
 
     function logoutConfirmation() {
       Swal.fire({

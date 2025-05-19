@@ -20,15 +20,20 @@ public class AdminController : Controller
             return View();
         }
         
-           public IActionResult LoginAdmin()
+        public IActionResult LoginAdmin()
+        {
+            return View();
+        }
+        
+        public IActionResult LoginStaff()
         {
             return View();
         }
 
-             public IActionResult AdminDashBoard()
-        {
-            return View();
-        }
+    public IActionResult AdminDashBoard()
+    {
+        return View();
+    }
 
 
 

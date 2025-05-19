@@ -39,6 +39,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTG9naW5BZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/CTU PROJECT/lto-management-system/Queueing Management System/Views/Admin/LoginStaff.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTG9naW5TdGFmZi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/CTU PROJECT/lto-management-system/Queueing Management System/Views/Admin/PartialTransaction/AdminCreateTransaction.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFydGlhbFRyYW5zYWN0aW9uXEFkbWluQ3JlYXRlVHJhbnNhY3Rpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -61,6 +65,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/CTU PROJECT/lto-management-system/Queueing Management System/Views/Booking/pop-upBooking.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xwb3AtdXBCb29raW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/CTU PROJECT/lto-management-system/Queueing Management System/Views/DriversLincense/bookInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJpdmVyc0xpbmNlbnNlXGJvb2tJbmZvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/CTU PROJECT/lto-management-system/Queueing Management System/Views/DriversLincense/bookTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJpdmVyc0xpbmNlbnNlXGJvb2tUYWJsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/CTU PROJECT/lto-management-system/Queueing Management System/Views/DriversLincense/LawEnforcementTransactions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJpdmVyc0xpbmNlbnNlXExhd0VuZm9yY2VtZW50VHJhbnNhY3Rpb25zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/CTU PROJECT/lto-management-system/Queueing Management System/Views/DriversLincense/LicenseRenewal.cshtml]
@@ -95,12 +111,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/CTU PROJECT/lto-management-system/Queueing Management System/Views/Home/Queue.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxRdWV1ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/CTU PROJECT/lto-management-system/Queueing Management System/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/CTU PROJECT/lto-management-system/Queueing Management System/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/CTU PROJECT/lto-management-system/Queueing Management System/Views/VehicleRegistration/bookInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZVJlZ2lzdHJhdGlvblxib29rSW5mby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/CTU PROJECT/lto-management-system/Queueing Management System/Views/VehicleRegistration/bookTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZVJlZ2lzdHJhdGlvblxib29rVGFibGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/CTU PROJECT/lto-management-system/Queueing Management System/Views/VehicleRegistration/VehicleNewRegistration.cshtml]

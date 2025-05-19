@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2025 at 08:47 PM
+-- Generation Time: May 19, 2025 at 08:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -67,8 +67,11 @@ CREATE TABLE `booking` (
 
 INSERT INTO `booking` (`bookingId`, `transactionId`, `bookingDate`, `status`, `firstname`, `lastname`, `middlename`, `age`, `prioritynumber`, `validID`, `gmail`) VALUES
 (4, 12, '2025-05-02', 'Pending', 's', 's', 's', 12, 'Pending', 'na', 'sinadjnamichaeljay@gmail.com'),
-(5, 14, '2025-05-02', 'Pending', 'as', 'as', 'as', 12, 'Pending', 'na', 'sinadjnamichaeljay@gmail.com'),
-(6, 12, '2025-05-09', 'Pending', 'Michael Jay', 'Sinadjan', 'Damas', 18, 'Pending', 'na', 'sinadjanmichaeljay@gmail.com');
+(5, 14, '2025-05-02', 'Approved', 'Jey ', 'Saga', 'Limbaroc', 20, 'P-001', NULL, 'sinadjnamichaeljay@gmail.com'),
+(6, 12, '2025-05-09', 'Pending', 'Michael Jay', 'Sinadjan', 'Damas', 18, 'Pending', 'na', 'sinadjanmichaeljay@gmail.com'),
+(9, 13, '2025-05-16', 'Pending', 'Johaness', 'Tidoso', 'Saga', 18, 'Pending', 'na', 'tidosojohaness@gmail.com'),
+(10, 14, '2025-05-14', 'Approved', 'Johanes', 'Tidoso', 'Saga', 18, 'P-001', NULL, 'tidosojohaness@gmail.com'),
+(11, 14, '2025-05-09', 'Approved', 'Jey', 'Gotgot', 'Limbaroc', 23, 'P-001', NULL, 'jeysaga333@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -105,7 +108,7 @@ CREATE TABLE `staffing` (
 --
 
 INSERT INTO `staffing` (`staff_id`, `username`, `password`, `fullname`, `status`) VALUES
-(2, 'Saga', 'Yulo', 'Jey', 'Active'),
+(2, 'Saga', 'Yulo', 'Jey', 'Inactive'),
 (4, 'sd', 's', 'a', 'Active');
 
 -- --------------------------------------------------------
@@ -124,7 +127,6 @@ CREATE TABLE `transaction` (
 --
 
 INSERT INTO `transaction` (`transaction_id`, `transaction_name`) VALUES
-(5, 'Clearance'),
 (6, 'Professional License'),
 (7, 'Non-Professional License'),
 (8, 'License Renewal'),
@@ -183,7 +185,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `bookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `bookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `client`
@@ -201,7 +203,7 @@ ALTER TABLE `staffing`
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

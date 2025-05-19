@@ -34,11 +34,17 @@ public class DriversLincenseController : Controller
     {
         return View();
     }
-        
-         public IActionResult NonProfessionalLicense()
+
+    public IActionResult NonProfessionalLicense()
     {
         return View();
     }
+    
+    public IActionResult LawEnforcementTransactions()
+    {
+        return View();
+    }
+
 
 
 

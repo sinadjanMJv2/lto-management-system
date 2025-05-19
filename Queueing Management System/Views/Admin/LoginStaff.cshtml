@@ -18,7 +18,7 @@
       </div>
       <div class="col-md-8  col-lg-6 col-xl-4 offset-xl-1">
         <form>
-          <h1 class="lead fw-normal mb-0 me-3 fw-bold fs-1 mb-4">Sign in as Administrator</h1>
+          <h1 class="lead fw-normal mb-0 me-3 fw-bold fs-1 mb-4">Sign in as Office Staff</h1>
 
           <!-- Email input -->
           <div data-mdb-input-init class="form-outline mb-4">
@@ -88,7 +88,7 @@
   }
 
   function getAdminAcc() {
-    $.ajax("../api/adminapi/getAdminAccount")
+    $.ajax("../api/adminapi/getStaff")
       .done(function (result) {
         AdminList = result;
 
@@ -110,7 +110,7 @@
       empty();
     } else if (usernameAdd.includes(username)) {
       $.ajax({
-        url: "/api/adminapi/userloginAdmin",
+        url: "/api/adminapi/userloginStaff",
         method: "POST",
         data: {
           "username": username,
@@ -118,7 +118,7 @@
         },
         success: res => {
           sessionStorage.setItem("Logged", true);
-          sessionStorage.setItem("userType", "admin");
+          sessionStorage.setItem("userType", "staff");
 
           const filteredUserData = AdminList.filter(
             user => user.username === username && user.password === pass

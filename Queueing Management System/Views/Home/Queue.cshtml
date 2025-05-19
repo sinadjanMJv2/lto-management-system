@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Priority Queue with Voice</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .queue-box { margin-top: 20px; }
+    .queue-item { padding: 10px; border: 1px solid #ccc; margin-bottom: 5px; }
+    #current { font-size: 20px; font-weight: bold; margin-top: 20px; }
+    .btn { padding: 10px 15px; margin-top: 10px; }
+    .mic-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Priority Queue System</h2>
+
+<div id="queueList" class="queue-box"></div>
+
+<button class="btn" onclick="nextInQueue()">Next</button>
+<span id="speakBtn" class="mic-btn" onclick="speakCurrent()">🎤</span>
+
+<div id="current">Current: None</div>
+
+<script>
+  class PriorityQueue {
+    constructor() {
+      this.queue = [];
+    }
+
+    enqueue(item) {
+      if (!item || typeof item.priority !== "number") {
+        throw new Error("Item must be an object with a numeric 'priority'.");
+      }
+      this.queue.push(item);
+      this.queue.sort((a, b) => b.priority - a.priority);
+    }
+
+    dequeue() {
+      return this.queue.shift();
+    }
+
+    peek() {
+      return this.queue[0];
+    }
+
+    isEmpty() {
+      return this.queue.length === 0;
+    }
+
+    getAll() {
+      return this.queue;
+    }
+  }
+
+  const q = new PriorityQueue();
+
+  // Sample data
+const sampleData = [
+  { name: "Ana Santos", priority: 5, code: "P-001" },
+  { name: "Carlos Dela Cruz", priority: 5, code: "P-002" },
+  { name: "Luis Fernandez", priority: 5, code: "P-003" },
+  { name: "Maria Lopez", priority: 5, code: "P-004" },
+  { name: "John Reyes", priority: 5, code: "P-005" },
+  { name: "Emma Garcia", priority: 5, code: "P-006" },
+  { name: "Miguel Ramos", priority: 4, code: "P-007" },
+  { name: "Sophia Cruz", priority: 4, code: "P-008" },
+  { name: "Daniel Rivera", priority: 4, code: "P-009" },
+  { name: "Grace Lim", priority: 4, code: "P-010" },
+  { name: "Kevin Tan", priority:4, code: "P-011" },
+  { name: "Isabella Ong", priority: 3, code: "P-012" },
+  { name: "Jacob Bautista", priority: 3, code: "P-013" },
+  { name: "Alyssa Mendoza", priority: 3, code: "P-014" },
+  { name: "Nathan Uy", priority: 3, code: "P-015" },
+  { name: "Chloe Sy", priority: 3, code: "P-016" },
+  { name: "Joshua Go", priority: 2, code: "P-017" },
+  { name: "Leah Co", priority: 2, code: "P-018" },
+  { name: "Aaron Lim", priority: 2, code: "P-019" },
+  { name: "Bea Chua", priority: 1, code: "P-020" }
+];
+
+sampleData.forEach(item => q.enqueue(item)); 
+
+  function renderQueue() {
+    const queueDiv = document.getElementById("queueList");
+    const items = q.getAll();
+    queueDiv.innerHTML = "";
+
+    items.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "queue-item";
+      div.textContent = ` ${item.code} - ${item.name}`;
+      queueDiv.appendChild(div);
+    });
+  }
+
+  let currentCode = "";
+  function nextInQueue() {
+    const current = q.dequeue();
+    if (current) {
+      currentCode = current.code;
+      document.getElementById("current").textContent = `Current: ${current.code} - ${current.name}`;
+      speak(`Queue number ${current.code}, please come to the counter.`);
+    } else {
+      currentCode = "";
+      document.getElementById("current").textContent = "Current: No more in queue";
+    }
+    renderQueue();
+  }
+
+  function speakCurrent() {
+    if (currentCode) {
+      speak(`Queue number ${currentCode}, please come to the counter.`);
+    }
+  }
+
+  function speak(message) {
+    const utterance = new SpeechSynthesisUtterance(message);
+    utterance.rate = 1; // Adjust voice speed if needed
+    speechSynthesis.speak(utterance);
+  }
+
+  renderQueue();
+</script>
+
+</body>
+</html>

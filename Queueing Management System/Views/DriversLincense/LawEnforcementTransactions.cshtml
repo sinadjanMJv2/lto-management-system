@@ -3,8 +3,8 @@
 <div class="card" style="width: 18rem;">
   <img src="~/image/pending-text.webp" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Pending NonProfessional License</h5>
-    <p class="card-text"> Total Pending NonProfessional License</p>
+    <h5 class="card-title">Pending Law Enforcement Transactions</h5>
+    <p class="card-text"> Total Pending Law Enforcement Transactions</p>
       <figure><img src="./../image/team.png" alt=""> <h1 class="pending">500</h1></figure>
 
   </div>
@@ -13,8 +13,8 @@
 <div class="card" style="width: 18rem;">
   <img src="~/image/approved.png" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Approved NonProfessional License</h5>
-    <p class="card-text"> Total Approved NonProfessional License</p>
+    <h5 class="card-title">Approved Law Enforcement Transactions</h5>
+    <p class="card-text"> Total Approved Law Enforcement Transactions</p>
       <figure><img src="./../image/team.png" alt=""> <h1 class="approved">500</h1></figure>
    
  
@@ -80,8 +80,8 @@ displaySPData();
     url: '../api/adminapi/getBookings',
     method: 'GET',
     success: function(result) {
-      // Filter the data where transactionName is "NonProfessional License"
-     BookPermitBookings = result.filter(item => item.transactionName === "Non-Professional License");
+      // Filter the data where transactionName is "Book Permit"
+     BookPermitBookings = result.filter(item => item.transactionName === "Law Enforcement Transactions");
 
       var pendingCount = BookPermitBookings.filter(b => b.status === "Pending").length;
     var approvedCount = BookPermitBookings.filter(b => b.status === "Approved").length;

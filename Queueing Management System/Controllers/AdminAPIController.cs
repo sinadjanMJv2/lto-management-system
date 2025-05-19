@@ -39,41 +39,52 @@ namespace Queueing_Management_System.Controllers
             }
             return new BadRequestObjectResult("Account not found");
         }
+        
+          [HttpPost]
+        public async Task<IActionResult> userloginStaff(string username, string password)
+        {
+            var user = await _context.Staffings.FirstOrDefaultAsync(b => b.Username == username && b.Password == password);
+            if (user != null)
+            {
+                return Ok();
+            }
+            return new BadRequestObjectResult("Account not found");
+        }
 
 
 
 
         /******************** JOINING DATA ****************/
-    
+
         public ActionResult<List<BookingViewModel>> getBookings()
         {
-           var result = (
-                from b in _context.Bookings
-                join t in _context.Transactions
-                on b.TransactionId equals t.TransactionId // naka base siya table if int ba or sting kung int mag tostring ka
+            var result = (
+                 from b in _context.Bookings
+                 join t in _context.Transactions
+                 on b.TransactionId equals t.TransactionId // naka base siya table if int ba or sting kung int mag tostring ka
 
-                select new BookingViewModel
-                {
-                   TransactionId = t.TransactionId,
-                    TransactionName = t.TransactionName,
-                    BookingId = b.BookingId,
-                    BookingDate = b.BookingDate,
-                    Status = b.Status,
-                    Firstname = b.Firstname,
+                 select new BookingViewModel
+                 {
+                     TransactionId = t.TransactionId,
+                     TransactionName = t.TransactionName,
+                     BookingId = b.BookingId,
+                     BookingDate = b.BookingDate,
+                     Status = b.Status,
+                     Firstname = b.Firstname,
                      Lastname = b.Lastname,
-                    Middlename = b.Middlename,
-                    Age = b.Age,
-                    Gmail = b.Gmail,
-                    Prioritynumber = b.Prioritynumber
+                     Middlename = b.Middlename,
+                     Age = b.Age,
+                     Gmail = b.Gmail,
+                     Prioritynumber = b.Prioritynumber
 
-                }
+                 }
 
 
 
-            ).ToList();
+             ).ToList();
             return Ok(result);
 
-           
+
         }
     /************* DISPLAY OPERATIONS *****************/
         public ActionResult<List<Staffing>> getStaff()
@@ -155,6 +166,22 @@ namespace Queueing_Management_System.Controllers
             try
             {
                 _context.Transactions.Update(upTransac);
+                _context.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+
+            return Ok();
+        }
+
+        public IActionResult updateBooking(Booking updateBooking)
+        {
+            try
+            {
+                _context.Bookings.Update(updateBooking);
                 _context.SaveChanges();
             }
             catch (System.Exception)
