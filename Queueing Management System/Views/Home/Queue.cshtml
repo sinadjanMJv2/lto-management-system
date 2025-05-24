@@ -1,132 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Priority Queue with Voice</title>
+  <meta charset="UTF-8" />
+  <title>Auto Counter Queue System</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    .queue-box { margin-top: 20px; }
-    .queue-item { padding: 10px; border: 1px solid #ccc; margin-bottom: 5px; }
-    #current { font-size: 20px; font-weight: bold; margin-top: 20px; }
-    .btn { padding: 10px 15px; margin-top: 10px; }
-    .mic-btn {
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-    }
+   body{font-family:inherit;padding:20px}
+   h2{margin-top:30px}
+   ul{list-style-type:none;padding-left:0}
+   li{padding:5px 0;font-weight: 800;}
+   button{margin:10px 10px 10px 0;padding:10px 20px;font-size:16px}
+   #queueList{margin-top:20px}
+  .counter_con{display:flex;gap:300px}
   </style>
 </head>
 <body>
 
-<h2>Priority Queue System</h2>
+  <h1>List of Queue for Todays Transactions <span class="datenow"></span></h1>
 
-<div id="queueList" class="queue-box"></div>
+  <button onclick="callNext()">🎤 Call Next</button>
+  <button onclick="repeatCall()">🔁 Call Again</button>
 
-<button class="btn" onclick="nextInQueue()">Next</button>
-<span id="speakBtn" class="mic-btn" onclick="speakCurrent()">🎤</span>
+  <h2>All Today's Approved Bookings</h2>
+  <ul id="queueList"></ul>
 
-<div id="current">Current: None</div>
+<div class="counter_con">
+  <div id="counter1">
+    <h2>Counter 1 </h2>
+    <ul id="counter1List"></ul>
+  </div>
 
+  <div id="counter2">
+    <h2>Counter 2 </h2>
+    <ul id="counter2List"></ul>
+  </div>
+  </div>
+
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-  class PriorityQueue {
-    constructor() {
-      this.queue = [];
+  var BookingList = [];
+  let queue = [];
+  let counter1 = [];
+  let counter2 = [];
+  let currentCall = null;
+
+  $(document).ready(function () {
+    getBooking();
+
+    function getBooking() {
+      $.ajax("../api/adminapi/getBookings")
+        .done(function (result) {
+          BookingList = result;
+          initializeQueue();
+        })
+        .fail(function () {
+          alert("Failed to fetch booking data.");
+        });
     }
 
-    enqueue(item) {
-      if (!item || typeof item.priority !== "number") {
-        throw new Error("Item must be an object with a numeric 'priority'.");
+    function initializeQueue() {
+      // Format today's date as YYYY-MM-DD
+      let today = new Date();
+      let formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+      // Filter approved bookings for today
+      queue = BookingList.filter(
+        entry => entry.status === "Approved" && entry.bookingDate === formattedToday
+      );
+
+      updateDisplay();
+    }
+
+    // UI elements
+    const list1 = $("#counter1List");
+    const list2 = $("#counter2List");
+    const queueList = $("#queueList");
+
+    
+
+    function updateDisplay() {
+      // Counter 1
+      list1.empty();
+      counter1.forEach(entry => {
+        list1.append(`<li>${entry.prioritynumber} - ${entry.firstname} ${entry.middlename} ${entry.lastname}</li>`);
+      });
+
+      // Counter 2
+      list2.empty();
+      counter2.forEach(entry => {
+        list2.append(`<li>${entry.prioritynumber} - ${entry.firstname} ${entry.middlename} ${entry.lastname}</li>`);
+      });
+
+      // Full queue list (approved bookings for today)
+      let today = new Date();
+      let formattedToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+      queueList.empty();
+      BookingList
+        .filter(entry => entry.status === "Approved" && entry.bookingDate === formattedToday)
+        .forEach(entry => {
+          queueList.append(`<li>${entry.prioritynumber} - ${entry.firstname} ${entry.middlename} ${entry.lastname} (${entry.transactionName})</li>`);
+        });
+    }
+
+    function classifyCounter(transactionName) {
+      const counter1Services = ["Student Permit", "License Conversion"];
+      return counter1Services.includes(transactionName) ? 1 : 2;
+    }
+
+    window.callNext = function () {
+      if (queue.length === 0) {
+        alert("No more people in the queue.");
+        return;
       }
-      this.queue.push(item);
-      this.queue.sort((a, b) => b.priority - a.priority);
+
+      const next = queue.shift(); // Get first in queue
+      const counter = classifyCounter(next.transactionName);
+      const counterList = counter === 1 ? counter1 : counter2;
+
+      counterList.push(next);
+      currentCall = { person: next, counter: counter };
+      updateDisplay();
+
+      speakNow(`Now serving ${next.prioritynumber} ${next.firstname} ${next.middlename} ${next.lastname} at counter ${counter}`);
+    };
+
+    window.repeatCall = function () {
+      if (!currentCall) {
+        alert("No one has been called yet.");
+        return;
+      }
+      const { person, counter } = currentCall;
+      speakNow(`Now serving ${person.prioritynumber} ${person.firstname} ${person.middlename} ${person.lastname} at counter ${counter}`);
+    };
+
+    function speakNow(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      speechSynthesis.speak(utterance);
     }
-
-    dequeue() {
-      return this.queue.shift();
-    }
-
-    peek() {
-      return this.queue[0];
-    }
-
-    isEmpty() {
-      return this.queue.length === 0;
-    }
-
-    getAll() {
-      return this.queue;
-    }
-  }
-
-  const q = new PriorityQueue();
-
-  // Sample data
-const sampleData = [
-  { name: "Ana Santos", priority: 5, code: "P-001" },
-  { name: "Carlos Dela Cruz", priority: 5, code: "P-002" },
-  { name: "Luis Fernandez", priority: 5, code: "P-003" },
-  { name: "Maria Lopez", priority: 5, code: "P-004" },
-  { name: "John Reyes", priority: 5, code: "P-005" },
-  { name: "Emma Garcia", priority: 5, code: "P-006" },
-  { name: "Miguel Ramos", priority: 4, code: "P-007" },
-  { name: "Sophia Cruz", priority: 4, code: "P-008" },
-  { name: "Daniel Rivera", priority: 4, code: "P-009" },
-  { name: "Grace Lim", priority: 4, code: "P-010" },
-  { name: "Kevin Tan", priority:4, code: "P-011" },
-  { name: "Isabella Ong", priority: 3, code: "P-012" },
-  { name: "Jacob Bautista", priority: 3, code: "P-013" },
-  { name: "Alyssa Mendoza", priority: 3, code: "P-014" },
-  { name: "Nathan Uy", priority: 3, code: "P-015" },
-  { name: "Chloe Sy", priority: 3, code: "P-016" },
-  { name: "Joshua Go", priority: 2, code: "P-017" },
-  { name: "Leah Co", priority: 2, code: "P-018" },
-  { name: "Aaron Lim", priority: 2, code: "P-019" },
-  { name: "Bea Chua", priority: 1, code: "P-020" }
-];
-
-sampleData.forEach(item => q.enqueue(item)); 
-
-  function renderQueue() {
-    const queueDiv = document.getElementById("queueList");
-    const items = q.getAll();
-    queueDiv.innerHTML = "";
-
-    items.forEach((item, index) => {
-      const div = document.createElement("div");
-      div.className = "queue-item";
-      div.textContent = ` ${item.code} - ${item.name}`;
-      queueDiv.appendChild(div);
-    });
-  }
-
-  let currentCode = "";
-  function nextInQueue() {
-    const current = q.dequeue();
-    if (current) {
-      currentCode = current.code;
-      document.getElementById("current").textContent = `Current: ${current.code} - ${current.name}`;
-      speak(`Queue number ${current.code}, please come to the counter.`);
-    } else {
-      currentCode = "";
-      document.getElementById("current").textContent = "Current: No more in queue";
-    }
-    renderQueue();
-  }
-
-  function speakCurrent() {
-    if (currentCode) {
-      speak(`Queue number ${currentCode}, please come to the counter.`);
-    }
-  }
-
-  function speak(message) {
-    const utterance = new SpeechSynthesisUtterance(message);
-    utterance.rate = 1; // Adjust voice speed if needed
-    speechSynthesis.speak(utterance);
-  }
-
-  renderQueue();
+  });
 </script>
+
 
 </body>
 </html>

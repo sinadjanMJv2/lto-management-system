@@ -5,7 +5,7 @@
   <div class="card-body">
     <h5 class="card-title">Pending Transactions</h5>
     <p class="card-text">Overall Total Pending Transaction</p>
-      <figure><img src="./../image/team.png" alt=""> <h1>8</h1></figure>
+      <figure><img src="./../image/team.png" alt=""> <h1 class="pending">8</h1></figure>
 
   </div>
 </div>
@@ -15,7 +15,7 @@
   <div class="card-body">
     <h5 class="card-title">Approved Transactions</h5>
     <p class="card-text">Overall Total Approved Transaction</p>
-      <figure><img src="./../image/team.png" alt=""> <h1>5</h1></figure>
+      <figure><img src="./../image/team.png" alt=""> <h1 class="approved">5</h1></figure>
    
  
   </div>
@@ -28,5 +28,68 @@
        
     .card-img-top{ height:250px;border: 1px solid #e2d8d8;}
 </style>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script src="~/lib/emailjs/dist/email.min.js"></script>
+
+
+
+<script>
+  var selectedBook;
+    var selectedBookId;
+   var BookList = {};
+   var BookingList = {};
+ var BookPermitBookings = {};
+  let counter = 1;
+ 
+  $(() => {
+getBooking();
+displaySPData();
+ 
+ function getBooking() {
+            $.ajax("../api/adminapi/getBookings")
+                .done(function (result) {
+                    BookingList = result;
+
+                });
+        }
+
+
+
+ function displaySPData() {
+  $.ajax({
+    url: '../api/adminapi/getBookings',
+    method: 'GET',
+    success: function(result) {
+      // Filter the data where transactionName is "License Renewal"
+ 
+
+      var pendingCount = result.filter(b => b.status === "Pending").length;
+    var approvedCount = result.filter(b => b.status === "Approved").length;
+     console.log(`Pending ${pendingCount}`);
+
+$('.pending').text(pendingCount);
+$('.approved').text(approvedCount);
+
+    }
+  });
+}
+
+
+
+
+
+  });//end of docuent ready
+
+</script>
+
+
+
 
 
