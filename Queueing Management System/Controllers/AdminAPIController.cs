@@ -41,18 +41,18 @@ namespace Queueing_Management_System.Controllers
         }
         
           [HttpPost]
-        public async Task<IActionResult> userloginStaff(string username, string password)
-        {
-            var user = await _context.Staffings.FirstOrDefaultAsync(b => b.Username == username && b.Password == password);
-            if (user != null)
-            {
-                return Ok();
-            }
-            return new BadRequestObjectResult("Account not found");
-        }
+public async Task<IActionResult> userloginStaff(string username, string password)
+{
+    var user = await _context.Staffings
+        .FirstOrDefaultAsync(b => b.Username == username && b.Password == password && b.Status == "Active");
 
+    if (user != null)
+    {
+        return Ok(user); // or return Ok() if you don't want to return user data
+    }
 
-
+    return BadRequest("Account not found or inactive");
+}
 
         /******************** JOINING DATA ****************/
 
